@@ -7,21 +7,21 @@ def f(x):
 def simpson(f, a, b, N): #f the function, a and b are the endpoints and N is the subintervals
    if N / 2 == 0:
     raise ValueError("N must be even int")
-   dx = (b-a)/N
+   dx = (b - a) / N
    # list of all the a to b x values so we can apply them later
    x_values = [a + i * dx for i in range(N + 1)]
    y_values = [f(x) for x in x_values]
    #printing a table for my teacher
    show_table = input("Full table of values? (y/n): ").strip().lower()
    if show_table == 'y':
-     print("Simpson Table approx")
+     print("[Simpson Table approx]")
      print(f"{'i':>3} {'x_i':>8} {'f(x_i)':>15}")
      print("-" * 32)
      for i, (x_val, y_val) in enumerate(zip(x_values, y_values)):
        print(f"{i:>3} {x_val:>10.5f} {y_val:>15.8f}")
    show_sum = input("Detailed summation (y/n): ").strip().lower()
    odd_sum = sum(y_values[i] for i in range(1, N, 2))
-   even_sum = sum(y_values[i] for i in range(1, N, 2))
+   even_sum = sum(y_values[i] for i in range(2, N, 2))
    if show_sum == 'y':
     print("\nDetailed Summation:") #for debugging ONLY
     print("f(x_0) =", y_values[0])
@@ -39,9 +39,16 @@ def simpson(f, a, b, N): #f the function, a and b are the endpoints and N is the
 
    return S
 def main():
-  a = 0.0
-  b = 20.0
-  N = 40
+  a = float(input("Enter lower bound: ").strip())
+  b = float(input("Enter upper bound: ").strip())
+  temp_N = input("How many subintervals are you computing? (pick an even number): ").strip().lower()
+  try:
+    N = int(temp_N)
+    if N % 2 != 0:
+      raise ValueError("User entered non-even integer")
+  except:
+    print("Invalid input. Please enter an even int")
+    return
   approx = simpson(f,a,b,N)
   print("The approximate of the integral from 0 --> 20 using Simpson's with N = 40")
   print("Result =", approx)

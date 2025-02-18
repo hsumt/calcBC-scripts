@@ -39,20 +39,29 @@ def simpson(f, a, b, N): #f the function, a and b are the endpoints and N is the
 
    return S
 def main():
-  a = float(input("Enter lower bound: ").strip())
-  b = float(input("Enter upper bound: ").strip())
-  temp_N = input("How many subintervals are you computing? (pick an even number): ").strip().lower()
-  try:
-    N = int(temp_N)
-    if N % 2 != 0:
-      raise ValueError("User entered non-even integer")
-  except:
-    print("Invalid input. Please enter an even int")
-    return
-  approx = simpson(f,a,b,N)
-  print("The approximate of the integral from 0 --> 20 using Simpson's with N = 40")
-  print("Result =", approx)
-
+  while True:
+    negateValue = False
+    try:
+        a = float(input("Enter lower bound: ").strip())
+        b = float(input("Enter upper bound: ").strip())
+        if a >= b:
+           c = a
+           a = b
+           b = c
+           negateValue = True
+           
+        temp_N = input("How many subintervals are you computing? (pick an even number): ").strip().lower()
+        N = int(temp_N)
+        if N % 2 != 0:
+            raise ValueError("User entered non-even integer")
+        break
+    except:
+        print("Invalid input. Please enter an even int")
+    approx = simpson(f,a,b,N)
+    if negateValue == True:
+       approx = -approx
+    print("The approximate of the integral from 0 --> 20 using Simpson's with N = 40")
+    print("Result =", approx)
 #def complete. run main
 
 if __name__ == '__main__':

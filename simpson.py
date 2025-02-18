@@ -5,13 +5,13 @@ def f(x):
    factor = 3* math.pi / 20
    return math.sqrt(1+(factor**2) * (math.cos(factor * x)**2))
 def simpson(f, a, b, N): #f the function, a and b are the endpoints and N is the subintervals
-   if N / 2 == 0:
+   if N & 2 != 0:
     raise ValueError("N must be even int")
    dx = (b - a) / N
    # list of all the a to b x values so we can apply them later
    x_values = [a + i * dx for i in range(N + 1)]
    y_values = [f(x) for x in x_values]
-   #printing a table for my teacher
+   #printing a table for my teacher nuke for debugging
    show_table = input("Full table of values? (y/n): ").strip().lower()
    if show_table == 'y':
      print("[Simpson Table approx]")
@@ -23,7 +23,7 @@ def simpson(f, a, b, N): #f the function, a and b are the endpoints and N is the
    odd_sum = sum(y_values[i] for i in range(1, N, 2))
    even_sum = sum(y_values[i] for i in range(2, N, 2))
    if show_sum == 'y':
-    print("\nDetailed Summation:") #for debugging ONLY
+    print("\nDetailed Summation:") #for debugging go and comment this out
     print("f(x_0) =", y_values[0])
     print("f(x_N) =", y_values[-1])
     print("Sum of odd-indexed values: ", odd_sum)
@@ -55,13 +55,13 @@ def main():
         if N % 2 != 0:
             raise ValueError("User entered non-even integer")
         break
-    except:
+    except ValueError as e:
         print("Invalid input. Please enter an even int")
-    approx = simpson(f,a,b,N)
-    if negateValue == True:
-       approx = -approx
-    print("The approximate of the integral from 0 --> 20 using Simpson's with N = 40")
-    print("Result =", approx)
+  approx = simpson(f,a,b,N)
+  if negateValue == True:
+    approx = -approx
+  print("The approximate of the integral from 0 --> 20 using Simpson's with N = 40")
+  print("Result =", approx)
 #def complete. run main
 
 if __name__ == '__main__':

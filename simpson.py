@@ -1,3 +1,4 @@
+# Description: Using Simpson's Rule to approximate an integral approximation of the arc length of a sinusoidal modeling of bent sheet metal to the degree of 6 digit Desmos precision.
 import math
 def f(x):
    """ f(x) = sqrt(1 + ( (3pi/20))) * cos^2(3pi/20 *x) )) """

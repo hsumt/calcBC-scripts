@@ -1,12 +1,12 @@
 # Description: Using Simpson's Rule to approximate an integral approximation of the arc length of a sinusoidal modeling of bent sheet metal to the degree of 6 digit Desmos precision.
 import math
 def f(x):
-   """ f(x) = sqrt(1 + ( (3pi/20))) * cos^2(3pi/20 *x) )) """
+   #f(x) = sqrt(1 + ( (3pi/20)) * cos^2(3pi/20 *x))
    factor = 3* math.pi / 20
    return math.sqrt(1+(factor**2) * (math.cos(factor * x)**2))
 def simpson(f, a, b, N): #f the function, a and b are the endpoints and N is the subintervals
    if N & 2 != 0:
-    raise ValueError("N must be even int")
+    raise ValueError("N must be an even integer")
    dx = (b - a) / N
    # list of all the a to b x values so we can apply them later
    x_values = [a + i * dx for i in range(N + 1)]
